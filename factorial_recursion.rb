@@ -7,3 +7,7 @@ def factorial(n)
   end
 end
 
+# Calculate the factorial iteratively
+def iterative(n)
+  (1..n).inject { |product, n| product * n }
+end
