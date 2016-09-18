@@ -31,5 +31,14 @@ def permutation(str1, str2)
   str1.split('').sort == str2.split('').sort
 end
 
-p permutation('cat', 'tac')
-p permutation('cat', 'dog')
+# p permutation('cat', 'tac')
+# p permutation('cat', 'dog')
+
+# 1.3 URLify: Write a method to replace all spaces in a string with '%20'.
+
+def urlify(str)
+  words = str.split(' ')
+  words.join('%20')
+end
+
+p urlify("the cat in the  hat  ")
