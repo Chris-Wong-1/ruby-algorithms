@@ -43,3 +43,16 @@ class LinkedList
     old_head
   end
 end
+
+# 2.1: Write code to remove duplicates from a unsorted linked list.
+
+def remove_linked_list_duplicates(list)
+
+end
+
+test_list = LinkedList.new("A")
+test_list.unshift("B")
+test_list.unshift("C")
+test_list.unshift("B")
+
+p test_list.head
