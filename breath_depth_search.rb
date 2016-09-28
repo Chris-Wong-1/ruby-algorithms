@@ -31,3 +31,18 @@ child_1.left = grand_child_1
 child_1.right = grand_child_2
 root.left = child_1
 root.right = child_2
+
+def breath_first_search(node)
+  queue = []
+  queue.push(node)
+
+  while(queue.length != 0)
+    current = queue.shift
+    puts current.value
+    current.children.each do |child|
+      queue.push(child)
+    end
+  end
+end
+
+breath_first_search(root)
