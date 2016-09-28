@@ -46,3 +46,12 @@ def breath_first_search(node)
 end
 
 breath_first_search(root)
+
+def depth_first_search(node)
+  puts node.value
+  node.children.each do |child|
+    depth_first_search(child)
+  end
+end
+
+depth_first_search(root)
