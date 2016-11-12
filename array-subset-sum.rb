@@ -24,6 +24,22 @@ def array_subset_sum(arr)
   puts greatest_sum
 end
 
+def kadanes_sum(arr)
+  max_ending_here = 0
+  max_so_far = 0
+  arr.each do |el|
+    max_ending_here = max_ending_here + el
+    if max_ending_here < 0
+      max_ending_here = 0
+    end
+
+    if max_so_far < max_ending_here
+      max_so_far = max_ending_here
+    end
+  end
+  p max_so_far
+end
+
 test_1 = [1, 2, 3, 4]
 test_2 = [1, 1, -1, -1, -1, 1, 1, 1]
 test_3 = [-1, 0, 8, 0, -1]
@@ -33,3 +49,8 @@ array_subset_sum(test_1)
 array_subset_sum(test_2)
 array_subset_sum(test_3)
 array_subset_sum(test_4)
+
+kadanes_sum(test_1)
+kadanes_sum(test_2)
+kadanes_sum(test_3)
+kadanes_sum(test_4)
