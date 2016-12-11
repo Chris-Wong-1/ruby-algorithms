@@ -8,12 +8,12 @@ def binary_search(array, value)
   while (low <= high)
     mid = low + ( (high-low) / 2 )
 
-    if array[mid] == key
+    if array[mid] == value
       return mid
-    elsif array[mid] < key
+    elsif array[mid] < value
       low = mid + 1
     else
-      high = mid + 1
+      high = mid - 1
     end
   end
 
