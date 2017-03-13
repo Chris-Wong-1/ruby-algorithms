@@ -13,9 +13,34 @@ def array_products(array)
     i += 1
   end
 end
+# This is a O(N squared) implementation
 
 def greedy_products(array)
-  before_products = []
-  after_products = []
+  products = []
+  before_products = [1]
+  after_products = [1]
+  before_product_so_far = 1
+  after_product_so_far = 1
+  i = 0
+  j = array.length - 1
+  while i < array.length - 1
+    before_product_so_far = before_product_so_far * array[i]
+    before_products << before_product_so_far
+    i += 1
+    after_product_so_far = after_product_so_far * array[j]
+    after_products.unshift(after_product_so_far)
+    j -= 1
+  end
 
+  k = 0
+  while k < array.length
+    products << before_products[k] * after_products[k]
+    k += 1
+  end
+
+  products
 end
+# This is a O(2N) implementation which simplifies to O(N)
+
+arr = [2, 3, 4, 5]
+p greedy_products(arr)
