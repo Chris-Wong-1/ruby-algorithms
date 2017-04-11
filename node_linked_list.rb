@@ -6,53 +6,74 @@ class Node
     @next = next_node
   end
 
-  def to_s
-    value.to_s
-  end
 end
 
 class LinkedList
-  include Enumerable
 
-  attr_accessor :head
+  attr_accessor :head, :tail
 
-  def each
-    #if @head is nil the second half of the && expression won't run
-    @head && yield(@head)
+  # This linked list must be initialized with a node instance
+  def initialize(head)
+    @head = head
+    @tail = head
+  end
 
-    next_node = @head.next
-    while next_node
-      yield(next_node)
-      next_node = next_node.next
+  # Insert a new node after the tail of the linked list
+  def insert(node)
+    @tail.next = node
+    @tail = @tail.next
+  end
+
+  # Print out all the values of the linked list in order
+  def print
+    current_node = @head
+    while current_node != nil
+      puts current_node.value
+      current_node = current_node.next
     end
   end
 
-  def initialize(head = Node.new)
-    @head = head
+  # Iterate through the linked list and yield to a block
+  def each
+    if block_given?
+      current_node = @head
+      while current_node != nil
+        yield current_node
+        current_node = current_node.next
+      end
+    end
   end
 
-  #add node to the front of the list
-  def unshift(new_head)
-    new_head.next = @head
-    @head = new_head
-  end
-
-  def shift
-    old_head = @head
-    @head = @head.next
-    old_head
-  end
 end
 
 # 2.1: Write code to remove duplicates from a unsorted linked list.
 
-def remove_linked_list_duplicates(list)
-
+def remove_duplicates(list)
+  hash = Hash.new
+  unique = nil
+  list.each do |node|
+    if unique == nil
+      unique = LinkedList.new(node)
+      hash[node.value] = true
+    end
+    unless hash.has_key?(node.value)
+      unique.insert(node)
+      hash[node.value] = true
+    end
+  end
+  unique
 end
 
-test_list = LinkedList.new("A")
-test_list.unshift("B")
-test_list.unshift("C")
-test_list.unshift("B")
+node_a = Node.new("A")
+node_b = Node.new("B")
+node_c = Node.new("C")
+node_d = Node.new("D")
+node_x = Node.new("D")
 
-p test_list.head
+my_list = LinkedList.new(node_a)
+my_list.insert(node_b)
+my_list.insert(node_c)
+my_list.insert(node_d)
+my_list.insert(node_x)
+
+p remove_duplicates(my_list)
