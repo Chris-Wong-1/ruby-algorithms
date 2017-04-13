@@ -21,7 +21,7 @@ class LinkedList
   # Insert a new node after the tail of the linked list
   def insert(node)
     @tail.next = node
-    @tail = @tail.next
+    @tail = node
   end
 
   # Print out all the values of the linked list in order
