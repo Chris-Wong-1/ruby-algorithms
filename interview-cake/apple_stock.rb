@@ -53,7 +53,35 @@
 
 # SOULTION
 
+def get_max_profit(stock_prices_yesterday)
+	# Check that there are atleast two prices required for a buy/sell
+	if stock_prices_yesterday.length < 2
+		raise IndexError, 'At least two prices are required'
+	end
 
+	# Initialize min_price and max_profit for the first possible buy/sell
+	min_price = stock_prices_yesterday[0]
+	max_profit = stock_prices_yesterday[1] - stock_prices_yesterday[0]
+
+	stock_prices_yesterday.each_with_index do |price, index|
+		# skip the first price since we used it to initialize
+		if index == 0
+			next
+		end
+
+		# check the potential profit for the current price
+		potential_profit = price - min_price
+
+		# update max_profit if the potential profit is greater
+		max_profit = [max_profit, potential_profit].max
+
+		# update min_price so it's always the lowest we've seen so far
+		# it's important that min_price updates AFTER potential profit has been checked
+		min_price = [min_price, price].min
+	end
+	
+	return max_profit
+end
 
 prices = [10, 7, 5, 8, 11, 9]
 
