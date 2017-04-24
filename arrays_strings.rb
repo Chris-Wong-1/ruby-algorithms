@@ -9,17 +9,16 @@ end
 # p unique?("mom")
 
 def unique_with_hash?(str)
-  chars_hash = Hash.new(0)
+  chars_hash = Hash.new()
   chars = str.split("")
   chars.each do |char|
-    chars_hash[char] += 1
-  end
-  chars_hash.values.each do |value|
-    if value > 1
+    if chars_hash[char]
       return false
+    else
+      chars_hash[char] = true
     end
-    return true
   end
+  return true
 end
 
 # p unique_with_hash?("cat")
